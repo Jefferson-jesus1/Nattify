@@ -1,0 +1,17 @@
+# Credenciais do banco (NUNCA versionar) — use api/config.example.php como modelo
+api/config.php
+
+# Estado gerado em produção pelo admin
+api/data/theme.json
+api/data/theme.lock
+api/data/theme_*
+
+# Fotos enviadas pelo painel (conteúdo do site, não código)
+uploads/
+
+# Pacotes de atualização e cópias locais
+*.zip
+naffity-tema-natal/
+
+# Sistema
+.DS_Store

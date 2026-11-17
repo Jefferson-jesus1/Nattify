@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — Doce Encanto</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<!-- Tela de login -->
+<div id="loginScreen" class="login-screen">
+  <form id="loginForm" class="login-card">
+    <div class="brand-badge" style="margin:0 auto 14px;"><img src="/img/logo.jpg" alt="Naffity"></div>
+    <h2 style="text-align:center; font-size:24px;">Painel da loja</h2>
+    <p style="text-align:center; color:var(--ink-soft); font-size:13.5px; margin:6px 0 20px;">Entre para gerenciar produtos, estoque e pedidos.</p>
+    <div class="field"><label>Usuário</label><input id="loginUser" required autocomplete="username"></div>
+    <div class="field"><label>Senha</label><input id="loginPass" type="password" required autocomplete="current-password"></div>
+    <div id="loginError" style="color:var(--danger); font-size:13px; margin-bottom:10px; display:none;"></div>
+    <button class="btn btn-gold" style="width:100%; justify-content:center;">Entrar</button>
+    <p style="text-align:center; font-size:12px; color:var(--ink-soft); margin-top:14px;">Padrão inicial: admin / doce123</p>
+  </form>
+</div>
+
+<!-- App do admin -->
+<div id="adminApp" style="display:none;">
+  <header class="admin-topbar">
+    <div class="admin-topbar-inner">
+      <div class="brand"><div class="brand-badge" id="adminBadge"><img src="/img/logo.jpg" alt="Naffity"></div><div class="brand-name" id="adminSiteName">Painel</div></div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a href="/" target="_blank" class="btn btn-ghost btn-sm">Ver loja ↗</a>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="admin-tabs">
+      <button class="tab-btn active" data-tab="products">Produtos</button>
+      <button class="tab-btn" data-tab="categories">Categorias</button>
+      <button class="tab-btn" data-tab="clientes">Clientes</button>
+      <button class="tab-btn" data-tab="financeiro">Financeiro</button>
+      <button class="tab-btn" data-tab="aparencia">Aparência</button>
+    </nav>
+
+    <!-- PRODUTOS -->
+    <section class="tab-panel active" id="tab-products">
+      <div class="panel-head">
+        <h3>Produtos</h3>
+        <button class="btn btn-gold btn-sm" id="newProductBtn">+ Novo produto</button>
+      </div>
+      <div class="admin-grid" id="adminProductGrid"></div>
+    </section>
+
+    <!-- CATEGORIAS -->
+    <section class="tab-panel" id="tab-categories">
+      <div class="panel-card">
+        <h3>Categorias</h3>
+        <form id="newCatForm" style="display:flex; gap:10px; margin: 14px 0;">
+          <input id="newCatName" placeholder="Nome da nova categoria" style="flex:1; padding:11px 14px; border-radius:12px; border:1px solid #ddc9a0;">
+          <button class="btn btn-gold btn-sm">Adicionar</button>
+        </form>
+        <div id="catList" class="simple-list"></div>
+      </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section class="tab-panel" id="tab-clientes">
+      <div class="panel-head">
+        <h3>Clientes que mais compraram</h3>
+        <div class="chips" id="clientesPeriodChips">
+          <button class="chip active" data-period="day">Hoje</button>
+          <button class="chip" data-period="week">Esta semana</button>
+          <button class="chip" data-period="month">Este mês</button>
+          <button class="chip" data-period="year">Este ano</button>
+        </div>
+      </div>
+      <div class="stat-grid" id="clientesStatGrid"></div>
+      <div class="panel-card">
+        <h3>Ranking do período</h3>
+        <div id="clientesRankingList" class="simple-list"></div>
+      </div>
+    </section>
+
+    <!-- FINANCEIRO -->
+    <section class="tab-panel" id="tab-financeiro">
+      <div class="panel-card">
+        <h3>Novo lançamento</h3>
+        <form id="ledgerForm">
+          <div style="display:flex; gap:10px;">
+            <div class="field" style="flex:1"><label>Data</label><input id="lgDate" type="date" required></div>
+            <div class="field" style="flex:1">
+              <label>Tipo</label>
+              <select id="lgType">
+                <option value="entrada">Entrada (venda/recebimento)</option>
+                <option value="saida">Saída (gasto)</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <div class="field" style="flex:1"><label>Valor (R$)</label><input id="lgAmount" type="number" step="0.01" min="0" required></div>
+            <div class="field" style="flex:1"><label>Categoria (opcional)</label><input id="lgCategory" placeholder="Ex: venda, ingrediente, embalagem"></div>
+          </div>
+          <div class="field" id="lgCustomerField"><label>Cliente (opcional, só p/ entrada)</label><input id="lgCustomer" placeholder="Nome do cliente"></div>
+          <div class="field"><label>Observação (opcional)</label><input id="lgDesc" placeholder="Ex: 2 pudins + 1 taça"></div>
+          <button class="btn btn-gold btn-sm" id="lgSubmit">Lançar</button>
+        </form>
+      </div>
+
+      <div class="panel-head" style="margin-top:30px;">
+        <h3>Fluxo de caixa</h3>
+        <div class="chips" id="financeiroPeriodChips">
+          <button class="chip active" data-period="day">Hoje</button>
+          <button class="chip" data-period="week">Esta semana</button>
+          <button class="chip" data-period="month">Este mês</button>
+          <button class="chip" data-period="year">Este ano</button>
+        </div>
+      </div>
+      <div class="stat-grid" id="financeiroStatGrid"></div>
+
+      <div class="panel-card">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; margin-bottom:14px;">
+          <div class="field" style="margin:0;"><label>De</label><input id="fDateFrom" type="date"></div>
+          <div class="field" style="margin:0;"><label>Até</label><input id="fDateTo" type="date"></div>
+          <button class="btn btn-ghost btn-sm" id="fFilterBtn">Filtrar por data</button>
+        </div>
+        <h3>Lançamentos</h3>
+        <div id="ledgerList" class="orders-list"></div>
+      </div>
+    </section>
+
+    <!-- APARÊNCIA -->
+    <section class="tab-panel" id="tab-aparencia">
+      <div class="panel-card">
+        <h3>Tema de Natal</h3>
+        <p style="color:var(--brown-soft); font-size:13.5px; margin:4px 0 14px;">Muda a decoração do cardápio público para todos os clientes. O painel não muda.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div style="font-size:14px;">Estado atual: <strong id="themeStatus" aria-live="polite">carregando…</strong></div>
+          <button class="btn btn-gold btn-sm" id="themeToggleBtn" disabled>…</button>
+        </div>
+        <div id="themeMsg" role="status" style="font-size:13px; margin-top:12px; display:none;"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Modal: novo/editar produto -->
+<div class="modal-overlay" id="productFormOverlay">
+  <div class="modal-box" style="position:relative; max-width:520px;">
+    <button class="modal-close" id="closeProductForm">✕</button>
+    <div class="modal-content">
+      <h3 id="productFormTitle" style="font-size:22px;">Novo produto</h3>
+      <form id="productForm" style="margin-top:14px;">
+        <input type="hidden" id="pfId">
+        <div class="field"><label>Nome</label><input id="pfName" required></div>
+        <div class="field"><label>Descrição</label><textarea id="pfDesc"></textarea></div>
+        <div style="display:flex; gap:10px;">
+          <div class="field" style="flex:1"><label>Preço (R$)</label><input id="pfPrice" type="number" step="0.01" min="0" required></div>
+          <div class="field" style="flex:1"><label>Estoque</label><input id="pfStock" type="number" min="0" required></div>
+        </div>
+        <div class="field"><label>Categoria</label><select id="pfCategory"></select></div>
+        <div class="field"><label>Foto do produto</label><input id="pfImage" type="file" accept="image/*"></div>
+        <div class="check-row">
+          <label class="check-label"><input type="checkbox" id="pfActive" checked> Ativo na loja</label>
+          <label class="check-label"><input type="checkbox" id="pfFeatured"> Destaque</label>
+        </div>
+        <button class="btn btn-gold" style="width:100%; justify-content:center; margin-top:6px;" id="pfSubmit">Salvar produto</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toast-holder"></div>
+
+<script src="/js/api.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/admin-theme.js?v=20261117"></script>
+</body>
+</html>
