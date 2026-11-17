@@ -33,8 +33,8 @@ html[data-theme="natal"] .xmas-only[hidden]{ display:block; }
 
 html[data-theme="natal"] body{
   background:
-    radial-gradient(rgba(178,34,42,.13) 1.2px, transparent 1.6px) 0 0 / 26px 26px,
-    #F8E8E5; /* vermelho bem clarinho (tom do #B2222A sobre o creme) */
+    radial-gradient(rgba(143,159,126,.22) 1.2px, transparent 1.6px) 0 0 / 26px 26px,
+    var(--x-cream);
 }
 html[data-theme="natal"] ::selection{ background: rgba(143,159,126,.45); color: var(--brown-deep); }
 html[data-theme="natal"] a:focus-visible,
@@ -45,7 +45,7 @@ html[data-theme="natal"] [tabindex]:focus-visible{ outline: 2px solid var(--x-wi
 /* ---------- Topo ---------- */
 html[data-theme="natal"] .topbar{
   /* degradê suave: sálvia → creme → vinho bem claro */
-  background: linear-gradient(100deg, rgba(241,214,210,.95) 0%, rgba(248,232,229,.95) 50%, rgba(226,229,214,.95) 100%);
+  background: linear-gradient(100deg, rgba(201,209,188,.94) 0%, rgba(245,234,215,.94) 52%, rgba(236,214,206,.94) 100%);
   border-bottom-color: rgba(114,47,55,.18);
 }
 html[data-theme="natal"] .topbar::after{
@@ -59,7 +59,7 @@ html[data-theme="natal"] .brand-badge{ border-color: rgba(114,47,55,.35); box-sh
 /* ---------- Hero ---------- */
 html[data-theme="natal"] .hero{
   padding-top: 58px; padding-bottom: 54px;
-  background: linear-gradient(180deg, #EFD3CF 0%, #F3DCD8 55%, #F6E3E0 100%);
+  background: linear-gradient(180deg, #C9D1BC 0%, #D5DAC6 55%, #E4E1CC 100%);
   border-bottom: 1px solid rgba(114,47,55,.25);
   box-shadow: inset 0 -6px 0 -3px rgba(245,234,215,.9);
 }
@@ -208,6 +208,69 @@ html[data-theme="natal"] .xmas-section-sprig svg{ width:100%; height:auto; displ
 html[data-theme="natal"] .section-head .xmas-section-sprig{ opacity:0; transform: translateY(-8px) scale(.9); transition: opacity .7s ease .15s, transform .7s cubic-bezier(.2,.7,.2,1) .15s; }
 html[data-theme="natal"] .section-head.in-view .xmas-section-sprig{ opacity:1; transform:none; }
 
+
+/* =====================================================================
+   Faixa vinho (#722F37) — busca, categorias e título "Nossos doces"
+   O wrapper .xmas-band não tem estilo nenhum fora do tema de Natal.
+   ===================================================================== */
+html[data-theme="natal"] .xmas-band{
+  position: relative; isolation: isolate; overflow: hidden;
+  margin: 34px 0 34px; padding: 30px 32px 34px; border-radius: 28px;
+  color: var(--x-cream);
+  background:
+    radial-gradient(520px 220px at 0% 0%, rgba(143,159,126,.28), transparent 70%),
+    radial-gradient(420px 200px at 100% 100%, rgba(178,34,42,.35), transparent 70%),
+    linear-gradient(160deg, #803843 0%, #722F37 45%, #5E262D 100%);
+  box-shadow: 0 30px 60px -34px rgba(114,47,55,.75), 0 2px 0 rgba(255,250,241,.5) inset;
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+}
+/* textura de pontinhos creme bem sutil */
+html[data-theme="natal"] .xmas-band::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background: radial-gradient(rgba(245,234,215,.10) 1.1px, transparent 1.5px) 0 0 / 22px 22px;
+}
+/* moldura interna fina, como um cartão de presente */
+html[data-theme="natal"] .xmas-band::after{
+  content:""; position:absolute; inset:9px; z-index:-1; pointer-events:none;
+  border: 1px solid rgba(245,234,215,.22); border-radius: 21px;
+}
+/* entrada da faixa (só com o tema; se o JS de revelação não rodar, os filhos já ficam ocultos pelo sistema) */
+html[data-theme="natal"] .xmas-band:has(> .controls:not(.in-view)){ opacity:0; transform: translateY(18px) scale(.985); }
+
+html[data-theme="natal"] .xmas-band .controls{ margin: 0; }
+html[data-theme="natal"] .xmas-band .section-head{ margin: 34px 0 0; }
+
+/* Busca sobre o vinho */
+html[data-theme="natal"] .xmas-band .search-box{ border-color: transparent; box-shadow: 0 14px 28px -18px rgba(0,0,0,.45); }
+html[data-theme="natal"] .xmas-band .search-box:focus-within{ box-shadow: 0 0 0 4px rgba(245,234,215,.28), 0 14px 28px -18px rgba(0,0,0,.45); }
+
+/* Categorias sobre o vinho */
+html[data-theme="natal"] .xmas-band .chip{ background: rgba(255,250,241,.07); color: var(--x-cream); border-color: rgba(245,234,215,.38); }
+html[data-theme="natal"] .xmas-band .chip:hover{ background: rgba(255,250,241,.16); color:#fff; border-color: rgba(245,234,215,.7); }
+html[data-theme="natal"] .xmas-band .chip.active{ background: var(--x-cream); color: var(--x-wine); border-color: var(--x-cream); box-shadow: 0 10px 22px -12px rgba(0,0,0,.5); }
+html[data-theme="natal"] .xmas-band .chip.active::after{ background: linear-gradient(100deg, transparent, rgba(143,159,126,.35), transparent); }
+
+/* Título sobre o vinho */
+html[data-theme="natal"] .xmas-band .section-head .sub{ color: #F2C9CC; }
+html[data-theme="natal"] .xmas-band .section-head h2{ color: var(--x-cream); }
+html[data-theme="natal"] .xmas-band .xmas-section-sprig{ color: #A9B898; }
+html[data-theme="natal"] .xmas-band .divider .ln{ background: linear-gradient(90deg, transparent, rgba(245,234,215,.55)); }
+html[data-theme="natal"] .xmas-band .divider .ln:last-child{ background: linear-gradient(90deg, rgba(245,234,215,.55), transparent); }
+html[data-theme="natal"] .xmas-band .divider .heart{ color: #F2C9CC; }
+
+/* Foco visível sobre fundo escuro */
+html[data-theme="natal"] .xmas-band button:focus-visible,
+html[data-theme="natal"] .xmas-band input:focus-visible{ outline-color: var(--x-cream); }
+
+@media (max-width: 640px){
+  html[data-theme="natal"] .xmas-band{ margin: 28px -8px 28px; padding: 22px 18px 26px; border-radius: 22px; }
+  html[data-theme="natal"] .xmas-band::after{ inset: 7px; border-radius: 17px; }
+  html[data-theme="natal"] .xmas-band .section-head{ margin-top: 28px; }
+}
+@media (prefers-reduced-motion: reduce){
+  html[data-theme="natal"] .xmas-band{ opacity:1 !important; transform:none !important; }
+}
+
 /* ---------- Cards ---------- */
 html[data-theme="natal"] .cup-card{
   border-color: rgba(47,81,50,.16);
@@ -235,7 +298,7 @@ html[data-theme="natal"] .cup-body h3{ color: var(--brown-deep); }
 /* ---------- Rodapé ---------- */
 html[data-theme="natal"] footer{
   padding-top: 40px;
-  background: linear-gradient(180deg, rgba(248,232,229,0) 0%, #F3DCD8 35%, #EFD3CF 75%, #EACBC6 100%);
+  background: linear-gradient(180deg, rgba(245,234,215,0) 0%, #E4E1CC 30%, #D3DAC5 70%, #E6D2CB 100%);
   border-top: 1px solid rgba(114,47,55,.18);
 }
 html[data-theme="natal"] footer .fname{ color: var(--x-green); }
