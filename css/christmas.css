@@ -33,9 +33,15 @@ html[data-theme="natal"] .xmas-only[hidden]{ display:block; }
 
 html[data-theme="natal"] body{
   background:
-    radial-gradient(rgba(114,47,55,.16) 1.2px, transparent 1.6px) 0 0 / 26px 26px,
-    #E9C6C3; /* vinho #722F37 bem clarinho: fundo geral por baixo das seções */
+    radial-gradient(rgba(245,234,215,.10) 1.1px, transparent 1.5px) 0 0 / 22px 22px,
+    radial-gradient(900px 500px at 0% 0%, rgba(143,159,126,.22), transparent 70%),
+    radial-gradient(800px 500px at 100% 100%, rgba(178,34,42,.30), transparent 70%),
+    linear-gradient(160deg, #803843 0%, #722F37 45%, #5E262D 100%);
+  background-attachment: fixed; /* mesma cor da faixa vinho, cobrindo toda a tela */
+  background-color: #722F37;
 }
+/* textos soltos sobre o fundo vinho */
+html[data-theme="natal"] .empty-state{ color: var(--x-cream); }
 html[data-theme="natal"] ::selection{ background: rgba(143,159,126,.45); color: var(--brown-deep); }
 html[data-theme="natal"] a:focus-visible,
 html[data-theme="natal"] button:focus-visible,
@@ -298,7 +304,7 @@ html[data-theme="natal"] .cup-body h3{ color: var(--brown-deep); }
 /* ---------- Rodapé ---------- */
 html[data-theme="natal"] footer{
   padding-top: 40px;
-  background: linear-gradient(180deg, rgba(233,198,195,0) 0%, #E4E1CC 30%, #D3DAC5 70%, #E6D2CB 100%);
+  background: linear-gradient(180deg, rgba(114,47,55,0) 0%, #E4E1CC 30%, #D3DAC5 70%, #E6D2CB 100%);
   border-top: 1px solid rgba(114,47,55,.18);
 }
 html[data-theme="natal"] footer .fname{ color: var(--x-green); }
